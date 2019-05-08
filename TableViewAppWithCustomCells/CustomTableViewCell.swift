@@ -11,12 +11,11 @@ import UIKit
 class CustomTableViewCell: UITableViewCell {
 
     
+    @IBOutlet weak var testLabel: UILabel!
     
     @IBOutlet weak var dataImage: UIImageView!
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var releaseDate: UILabel!
+
+    @IBOutlet weak var anotherLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,14 +26,21 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     func setFields(result: Results) {
-        self.dataImage.image = result.poster_path
+        //self.dataImage.image = result.poster_path
+        print(result)
+        self.testLabel.text = result.title
         
-        self.titleLabel.text = result.title
-        
-        self.releaseDate.text = result.release_date
+        self.anotherLabel.text = result.original_title
         
     }
     
     
 
+}
+
+extension UIImageView {
+
+    func downloadImageFrom(url : URL) {
+        
+    }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var movieTable: UITableView!
     
     var results = [Results]()
@@ -21,13 +21,16 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
-        guard let url = URL(string: self.apiUrl) else { return  }
+        getDataFromUrl()
         
-         getDataFromUrl(url)
+        movieTable.dataSource = self
+        movieTable.delegate = self
         
     }
     
-    fileprivate func getDataFromUrl(_ url: URL) {
+    fileprivate func getDataFromUrl() {
+        
+        guard let url = URL(string: self.apiUrl) else { return  }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
@@ -45,7 +48,7 @@ class ViewController: UIViewController {
             }
             }.resume()
     }
-
+    
 }
 
 
@@ -58,11 +61,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let movie = self.results[indexPath.row]
+        let result = self.results[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as! CustomTableViewCell
         
-        cell.setFields(movie: movie)
+        cell.setFields(result: result)
         
         return cell
         
