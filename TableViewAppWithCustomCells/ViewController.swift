@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     var results = [Results]()
     
-    let apiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=7ec3cb25106cd4edee5e12ae47b59094&language=en-US&page=10"
+    let apiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=7ec3cb25106cd4edee5e12ae47b59094&language=en-US&page=2"
     
     
     override func viewDidLoad() {
@@ -69,6 +69,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     
