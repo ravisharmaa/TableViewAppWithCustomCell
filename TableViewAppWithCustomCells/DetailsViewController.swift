@@ -10,6 +10,7 @@ class DetailsViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var descriptionView: UITextView!
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -22,6 +23,8 @@ class DetailsViewController: UIViewController {
         guard let url = URL(string: imageUrl+data.poster_path) else { return  }
         
         setImageFrom(url)
+        
+        descriptionView.text = data.overview
         
     }
     
