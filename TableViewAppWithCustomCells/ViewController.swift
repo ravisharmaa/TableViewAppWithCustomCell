@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  TableViewAppWithCustomCells
-//
-//  Created by Ravi Bastola on 5/6/19.
-//  Copyright © 2019 Ravi Bastola. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -14,7 +6,9 @@ class ViewController: UIViewController {
     
     var results = [Results]()
     
-    let apiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=7ec3cb25106cd4edee5e12ae47b59094&language=en-US&page=2"
+    let apiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=7ec3cb25106cd4edee5e12ae47b59094&language=en-US&page=1"
+    
+    let imageUrl = "https://image.tmdb.org/t/p/w200"
     
     
     override func viewDidLoad() {
@@ -25,7 +19,23 @@ class ViewController: UIViewController {
         
         movieTable.dataSource = self
         movieTable.delegate = self
+        movieTable.estimatedRowHeight = 100
+        movieTable.rowHeight = UITableView.automaticDimension
         
+    }
+    
+    //MARK: Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = self.movieTable.indexPathForSelectedRow else {
+            return
+        }
+        
+        let detailVc = segue.destination as? DetailsViewController
+        
+        detailVc?.imageUrl = self.imageUrl
+        
+        detailVc?.data = results[indexPath.row]
     }
     
     fileprivate func getDataFromUrl() {
@@ -64,6 +74,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let result = self.results[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as! CustomTableViewCell
+        
+        cell.imageUrl = self.imageUrl
         
         cell.setFields(result: result)
         

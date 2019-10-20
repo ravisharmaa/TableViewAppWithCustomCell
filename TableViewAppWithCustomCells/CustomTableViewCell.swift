@@ -17,7 +17,7 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var anotherLabel: UILabel!
     
-    let imageUrl = "https://image.tmdb.org/t/p/w200";
+    var imageUrl = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,7 +35,7 @@ class CustomTableViewCell: UITableViewCell {
         
         self.testLabel.text = result.title
         
-        self.anotherLabel.text = result.release_date
+        self.anotherLabel.text = result.overview
         
     }
     
