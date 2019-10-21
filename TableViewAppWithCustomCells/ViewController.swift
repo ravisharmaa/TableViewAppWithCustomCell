@@ -5,11 +5,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var movieTable: UITableView!
     
     var results = [Results]()
-    
-    let apiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=7ec3cb25106cd4edee5e12ae47b59094&language=en-US&page=1"
-    
-    let imageUrl = "https://image.tmdb.org/t/p/w200"
-    
+
     
     override func viewDidLoad() {
         
@@ -27,20 +23,21 @@ class ViewController: UIViewController {
     //MARK: Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         guard let indexPath = self.movieTable.indexPathForSelectedRow else {
             return
         }
         
         let detailVc = segue.destination as? DetailsViewController
         
-        detailVc?.imageUrl = self.imageUrl
+        detailVc?.imageUrl = Constants.imageUrl
         
         detailVc?.data = results[indexPath.row]
     }
     
     fileprivate func getDataFromUrl() {
         
-        guard let url = URL(string: self.apiUrl) else { return  }
+        guard let url = URL(string: Constants.apiUrl) else { return  }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
@@ -54,7 +51,7 @@ class ViewController: UIViewController {
                     self?.movieTable.reloadData()
                 }
             } catch let jsonError {
-                print("some error with\(jsonError)")
+                print("Could not parse json \(jsonError)")
             }
             }.resume()
     }
@@ -75,7 +72,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as! CustomTableViewCell
         
-        cell.imageUrl = self.imageUrl
+        cell.imageUrl = Constants.imageUrl
         
         cell.setFields(result: result)
         

@@ -16,9 +16,7 @@ class DetailsViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        guard let data = data else { return }
-       
-        guard let imageUrl = imageUrl else { return }
+        guard let data = data, let imageUrl = imageUrl else { return }
         
         guard let url = URL(string: imageUrl+data.poster_path) else { return  }
         

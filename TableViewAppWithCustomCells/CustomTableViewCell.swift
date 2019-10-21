@@ -17,7 +17,7 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var anotherLabel: UILabel!
     
-    var imageUrl = ""
+    var imageUrl: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,7 +29,7 @@ class CustomTableViewCell: UITableViewCell {
     
     func setFields(result: Results) {
         
-        guard let url = URL(string: self.imageUrl+result.poster_path) else { return  }
+        guard let imageUrl = imageUrl, let url = URL(string: imageUrl+result.poster_path) else { return  }
         
         setImageFrom(url)
         
