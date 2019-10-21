@@ -1,11 +1,3 @@
-//
-//  CustomTableViewCell.swift
-//  TableViewAppWithCustomCells
-//
-//  Created by Ravi Bastola on 5/6/19.
-//  Copyright © 2019 Ravi Bastola. All rights reserved.
-//
-
 import UIKit
 
 class CustomTableViewCell: UITableViewCell {
